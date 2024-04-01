@@ -59,10 +59,11 @@ Route::delete('/rines/{id}',[LlantasController::class,'borrar'])->name('rines.de
 //proveedores
 Route::get('/proveedores',[ProveedoresController::class,'listado'])->name('proveedores.index');
 Route::get('/proveedores/{id}',[ProveedoresController::class,'show'])->name('proveedores.show');
-Route::get('/vistas/{id}',[ProveedoresController::class,'show'])->name('proveedores.show');
 Route::get('/admin/proveedores/create',[ProveedoresController::class,'create'])->name('proveedores.create');
 Route::get('/proveedores/{id}/editar',[ProveedoresController::class,'editar'])->name('proveedores.edit');
 Route::post('/proveedores',[ProveedoresController::class,'guardar'])->name('proveedores.store');
 Route::put('/proveedores/{id}',[ProveedoresController::class,'actualizar'])->name('proveedores.update');
 Route::delete('/proveedores/{id}',[ProveedoresController::class,'borrar'])->name('proveedores.delete');
+
+
 

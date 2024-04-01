@@ -88,4 +88,5 @@ class ProveedoresController extends Controller
     public function create(){
         return view ('/admin/proveedores/create');;
     }
+    
 }

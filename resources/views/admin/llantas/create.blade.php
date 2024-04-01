@@ -9,15 +9,8 @@
 <body>
   
 
-    <form class="row g-3 needs-validation" novalidate method="POST" action="/proveedores" enctype="multipart/form-data">
+    <form class="row g-3 needs-validation" novalidate method="POST" action="/llantas" enctype="multipart/form-data">
         @csrf
-        <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">ID de Llanta</label>
-            <input type="text" class="form-control" id="validationCustom01" name="id_llanta" required>
-            <div class="invalid-feedback">
-                Por favor ingresa un ID de llanta
-            </div>
-        </div>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Marca</label>
             <input type="text" class="form-control" id="validationCustom02" name="marca" required>
@@ -62,21 +55,21 @@
         </div>
         <div class="col-md-2">
             <label for="validationCustom08" class="form-label">Precio 1</label>
-            <input type="text" class="form-control" id="validationCustom08" name="precio1" required>
+            <input type="number" step="any" class="form-control" id="validationCustom08" name="precio1" required>
             <div class="invalid-feedback">
                 Por favor ingresa el precio 1
             </div>
         </div>
         <div class="col-md-2">
             <label for="validationCustom09" class="form-label">Precio 2</label>
-            <input type="text" class="form-control" id="validationCustom09" name="precio2" required>
+            <input type="number" step="any" class="form-control" id="validationCustom09" name="precio2" required>
             <div class="invalid-feedback">
                 Por favor ingresa el precio 2
             </div>
         </div>
         <div class="col-md-2">
             <label for="validationCustom10" class="form-label">Precio 3</label>
-            <input type="text" class="form-control" id="validationCustom10" name="precio3" required>
+            <input type="number" step="any" class="form-control" id="validationCustom10" name="precio3" required>
             <div class="invalid-feedback">
                 Por favor ingresa el precio 3
             </div>
@@ -97,10 +90,16 @@
         </div>
         <div class="col-md-4">
             <label for="validationCustom13" class="form-label">Proveedor</label>
-            <input type="text" class="form-control" id="validationCustom13" name="proveedor" required>
+            <select class="form-select" id="validationCustom13" name="id_proveedor" required>
+                <option value="" disabled selected>Selecciona un proveedor</option>
+                @foreach ($proveedores as $proveedor)
+                    <option value="{{ $proveedor->id_proveedor }}">{{ $proveedor->nombre }}</option>
+                @endforeach
+            </select>
             <div class="invalid-feedback">
-                Por favor ingresa el proveedor
+                Por favor selecciona un proveedor
             </div>
+        </div>
         </div>
         <div class="col-12">
             <div class="form-check">

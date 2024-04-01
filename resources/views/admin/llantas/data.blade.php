@@ -35,25 +35,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($llantas as $llanta)
-                    <tr>
-                        <td>{{ $llanta->id_llanta }}</td>
-                        <td>{{ $llanta->marca }}</td>
-                        <td>{{ $llanta->ancho }}</td>
-                        <td>{{ $llanta->alto }}</td>
-                        <td>{{ $llanta->rin }}</td>
-                        <td>{{ $llanta->indice_carga }}</td>
-                        <td>{{ $llanta->rango_velocidad }}</td>
-                        <td>{{ $llanta->precio1 }}</td>
-                        <td>{{ $llanta->precio2 }}</td>
-                        <td>{{ $llanta->precio3 }}</td>
-                        <td>{{ $llanta->fecha }}</td>
-                        <td>{{ $llanta->costo }}</td>
-                        <td>{{ $llanta->proveedor }}</td>
-                        <td><a href="/llantas/{{ $llanta->id_llanta }}/editar">Editar</a></td>
-                        <td><a href="/llantas/{{ $llanta->id_llanta }}">Borrar</a></td>
-                    </tr>
-                    @endforeach
+                  @foreach ($llantas as $llanta)
+                  <tr>
+                      <td>{{ $llanta->id_llanta }}</td>
+                      <td>{{ $llanta->marca }}</td>
+                      <td>{{ $llanta->ancho }}</td>
+                      <td>{{ $llanta->alto }}</td>
+                      <td>{{ $llanta->rin }}</td>
+                      <td>{{ $llanta->indice_carga }}</td>
+                      <td>{{ $llanta->rango_velocidad }}</td>
+                      <td>{{ $llanta->precio_1 }}</td>
+                      <td>{{ $llanta->precio_2 }}</td>
+                      <td>{{ $llanta->precio_3 }}</td>
+                      <td>{{ $llanta->fecha }}</td>
+                      <td>{{ $llanta->costo }}</td>
+                      <td>{{ $llanta->id_proveedor }}</td>
+                      <td><a href="/llantas/{{ $llanta->id_llanta }}/editar">Editar</a></td>
+                      <td><a href="/llantas/{{ $llanta->id_llanta }}">Borrar</a></td>
+                  </tr>
+                  @endforeach                  
                 </tbody>
             </table>            
             </div>

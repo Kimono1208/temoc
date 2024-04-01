@@ -102,7 +102,7 @@
         </div>
         <div class="col-md-5">
             <label for="validationCustom05" class="form-label">Imagen</label>
-            <td><img src="/storage/{{$llantas->imagen}}" alt="{{$clientes->imagen}}" width="100"></a></td>
+            <td><img src="/storage/{{$llantas->imagen}}" alt="{{$llanta->imagen}}" width="100"></a></td>
             <input type="file" accept="image/*" class="form-control" id="validationCustom05" name="imagen">
         </div>  
         <div class="col-12">

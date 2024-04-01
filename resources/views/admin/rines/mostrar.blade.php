@@ -10,76 +10,94 @@
   
 
 
-  <form class="row g-3 needs-validation" novalidate method="POST" action="/proveedores/{{$proveedores->id_proveedor}}" enctype="multipart/form-data">
-    @csrf
-    @method('DELETE')
-    <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Nombre Proveedor</label>
-        <div class="input-group has-validation">
-            <input type="text" class="form-control" id="validationCustomUsername" name="nombre" aria-describedby="inputGroupPrepend" readonly value="{{$proveedores->nombre}}">
-            <div class="invalid-feedback">
-                Ingresa el nombre del proveedor
+    <form class="row g-3 needs-validation" novalidate method="POST" action="/rines/{{$rin->id_rines}}" enctype="multipart/form-data">
+        @csrf
+        @method('DELETE')
+        <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">Marca</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="validationCustomUsername" name="marca" aria-describedby="inputGroupPrepend" readonly value="{{$rin->marca}}">
+                <div class="invalid-feedback">
+                    Ingresa la marca del rin
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-5">
-        <label for="validationCustom05" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="validationCustom05" name="direccion" readonly value="{{$proveedores->direccion}}">
-        <div class="invalid-feedback">
-            Por favor ingresa una dirección válida
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Barrenación</label>
+            <input type="text" class="form-control" id="validationCustom05" name="barrenacion" readonly value="{{$rin->barrenacion}}">
+            <div class="invalid-feedback">
+                Por favor ingresa una barrenación válida
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationCustom05" class="form-label">Producto</label>
-        <input type="text" class="form-control" id="validationCustom05" name="producto" readonly value="{{$proveedores->producto}}">
-        <div class="invalid-feedback">
-            Por favor ingresa un producto válido
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Medida</label>
+            <input type="text" class="form-control" id="validationCustom05" name="medida" readonly value="{{$rin->medida}}">
+            <div class="invalid-feedback">
+                Por favor ingresa una medida válida
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationCustom05" class="form-label">RFC</label>
-        <input type="text" class="form-control" id="validationCustom05" name="rfc" readonly value="{{$proveedores->rfc}}">
-        <div class="invalid-feedback">
-            Por favor ingresa un RFC válido
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Perforación</label>
+            <input type="text" class="form-control" id="validationCustom05" name="perforacion" readonly value="{{$rin->perforacion}}">
+            <div class="invalid-feedback">
+                Por favor ingresa una perforación válida
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationCustom05" class="form-label">CLABE</label>
-        <input type="text" class="form-control" id="validationCustom05" name="clabe" readonly value="{{$proveedores->clabe}}">
-        <div class="invalid-feedback">
-            Por favor ingresa una CLABE válida
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Ancho</label>
+            <input type="text" class="form-control" id="validationCustom05" name="ancho" readonly value="{{$rin->ancho}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un ancho válido
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationCustom05" class="form-label">Banco</label>
-        <input type="text" class="form-control" id="validationCustom05" name="banco" readonly value="{{$proveedores->banco}}">
-        <div class="invalid-feedback">
-            Por favor ingresa un banco válido
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Precio 1</label>
+            <input type="text" class="form-control" id="validationCustom05" name="precio_1" readonly value="{{$rin->precio_1}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un precio válido
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Teléfono</label>
-        <input type="text" class="form-control" id="validationCustom01" name="telefono" readonly value="{{$proveedores->telefono}}">
-        <div class="invalid-feedback">
-            Por favor ingrese un teléfono válido
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Precio 2</label>
+            <input type="text" class="form-control" id="validationCustom05" name="precio_2" readonly value="{{$rin->precio_2}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un precio válido
+            </div>
         </div>
-    </div>
-    <div class="col-md-5">
-        <label for="validationCustom01" class="form-label">Correo</label>
-        <input type="text" class="form-control" id="validationCustom01" name="correo" readonly value="{{$proveedores->correo}}">
-        <div class="invalid-feedback">
-            Por favor ingrese un correo electrónico válido
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Precio 3</label>
+            <input type="text" class="form-control" id="validationCustom05" name="precio_3" readonly value="{{$rin->precio_3}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un precio válido
+            </div>
         </div>
-    </div>
-    <div class="col-md-5">
-        <label for="validationCustom05" class="form-label">Imagen</label>
-        <img src="/storage/{{$proveedores->imagen_prov}}" alt="{{$proveedores->imagen_prov}}" width="100">
-    </div>
-    <div class="col-md-8">
-        <button class="btn btn-primary" type="submit">Borrar</button>
-        <a href="/proveedores" class="btn btn-primary">Regresar</a>
-    </div>
-</form>
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Fecha</label>
+            <input type="text" class="form-control" id="validationCustom05" name="fecha" readonly value="{{$rin->fecha}}">
+            <div class="invalid-feedback">
+                Por favor ingresa una fecha válida
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Proveedor</label>
+            <input type="text" class="form-control" id="validationCustom05" name="proveedor" readonly value="{{$rin->proveedor}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un proveedor válido
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom05" class="form-label">Costo</label>
+            <input type="text" class="form-control" id="validationCustom05" name="costo" readonly value="{{$rin->costo}}">
+            <div class="invalid-feedback">
+                Por favor ingresa un costo válido
+            </div>
+        </div>
+        <div class="col-md-8">
+            <button class="btn btn-primary" type="submit">Borrar</button>
+            <a href="/rines" class="btn btn-primary">Regresar</a>
+        </div>
+    </form>
+    
 
 </body>
 </html>
