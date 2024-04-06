@@ -30,32 +30,38 @@
                         <th scope="col">Fecha</th>
                         <th scope="col">Costo</th>
                         <th scope="col">Proveedor</th>
+                        <th scope="col">Fotos</th> 
                         <th scope="col">Editar</th>
                         <th scope="col">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach ($llantas as $llanta)
-                  <tr>
-                      <td>{{ $llanta->id_llanta }}</td>
-                      <td>{{ $llanta->marca }}</td>
-                      <td>{{ $llanta->ancho }}</td>
-                      <td>{{ $llanta->alto }}</td>
-                      <td>{{ $llanta->rin }}</td>
-                      <td>{{ $llanta->indice_carga }}</td>
-                      <td>{{ $llanta->rango_velocidad }}</td>
-                      <td>{{ $llanta->precio_1 }}</td>
-                      <td>{{ $llanta->precio_2 }}</td>
-                      <td>{{ $llanta->precio_3 }}</td>
-                      <td>{{ $llanta->fecha }}</td>
-                      <td>{{ $llanta->costo }}</td>
-                      <td>{{ $llanta->id_proveedor }}</td>
-                      <td><a href="/llantas/{{ $llanta->id_llanta }}/editar">Editar</a></td>
-                      <td><a href="/llantas/{{ $llanta->id_llanta }}">Borrar</a></td>
-                  </tr>
-                  @endforeach                  
+                    @foreach ($llantas as $llanta)
+                    <tr>
+                        <td>{{ $llanta->id_llanta }}</td>
+                        <td>{{ $llanta->marca }}</td>
+                        <td>{{ $llanta->ancho }}</td>
+                        <td>{{ $llanta->alto }}</td>
+                        <td>{{ $llanta->rin }}</td>
+                        <td>{{ $llanta->indice_carga }}</td>
+                        <td>{{ $llanta->rango_velocidad }}</td>
+                        <td>{{ $llanta->precio_1 }}</td>
+                        <td>{{ $llanta->precio_2 }}</td>
+                        <td>{{ $llanta->precio_3 }}</td>
+                        <td>{{ $llanta->fecha }}</td>
+                        <td>{{ $llanta->costo }}</td>
+                        <td>{{ $llanta->id_proveedor }}</td>
+                        <td>
+                          @foreach ($llanta->fotos as $foto)
+                          <img src="/storage/{{ $foto->ruta }}" alt="Foto de llanta" style="max-width: 100px; max-height: 100px;">
+                          @endforeach
+                        </td>
+                        <td><a href="/llantas/{{ $llanta->id_llanta }}/editar">Editar</a></td>
+                        <td><a href="/llantas/{{ $llanta->id_llanta }}">Borrar</a></td>
+                    </tr>
+                    @endforeach                  
                 </tbody>
-            </table>            
+            </table>       
             </div>
           </div>
         </div>

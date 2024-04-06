@@ -4,6 +4,7 @@ use App\Http\Controllers\LlantasController;
 use App\Http\Controllers\ProveedoresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\cliente\ProductoCatalogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::view('ventas','admin/vistas/billing');
 Route::view('perfil','admin/vistas/profile');
 Route::view('tablas','admin/vistas/data');
 Route::view('formulario','admin/formularios/fllantas');
+// Route::view('catalogo','clientes/catalogo');
 
 //clientes
 Route::get('/clientes',[ClientesController::class,'listado'])->name('clientes.index');
@@ -65,5 +67,7 @@ Route::post('/proveedores',[ProveedoresController::class,'guardar'])->name('prov
 Route::put('/proveedores/{id}',[ProveedoresController::class,'actualizar'])->name('proveedores.update');
 Route::delete('/proveedores/{id}',[ProveedoresController::class,'borrar'])->name('proveedores.delete');
 
-
-
+//area clientes
+//catalogo
+Route::get('/catalogo',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'catalogo'])->name('catalogo');
+Route::get('/detalle/{id}',[App\Http\Controllers\cliente\ProductoCatalogoController::class,'detalle'])->name('detalle');
