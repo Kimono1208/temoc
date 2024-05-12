@@ -26,8 +26,15 @@ Route::view('dashboard','admin/vistas/dashboard');
 Route::view('ventas','admin/vistas/billing');
 Route::view('perfil','admin/vistas/profile');
 Route::view('tablas','admin/vistas/data');
+Route::view('app','admin/vistas/virtual-reality');
 Route::view('formulario','admin/formularios/fllantas');
 // Route::view('catalogo','clientes/catalogo');
+Route::view('carrito','clientes/carrito');
+Route::view('carrito1','clientes/layout');
+Route::view('index','clientes/vistas/index');
+Route::view('login','admin/vistas/sign-in');
+
+
 
 //clientes
 Route::get('/clientes',[ClientesController::class,'listado'])->name('clientes.index');
@@ -71,3 +78,12 @@ Route::delete('/proveedores/{id}',[ProveedoresController::class,'borrar'])->name
 //catalogo
 Route::get('/catalogo',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'catalogo'])->name('catalogo');
 Route::get('/detalle/{id}',[App\Http\Controllers\cliente\ProductoCatalogoController::class,'detalle'])->name('detalle');
+
+//carrito compras
+Route::post('/agregar_carrito/{id}', [App\Http\Controllers\cliente\ProductoCatalogoController::class, 'agregarcarrito'])->name('carrito.agregar');
+Route::get('/actualizar_carrito/{id}',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'actualizarcarrito'])->name('carrito.actualizar');
+Route::delete('/quitar_carrito/{id}',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'quitarcarrito'])->name('carrito.quitar');
+Route::get('/vaciar_carrito',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'vaciarcarrito'])->name('carrito.vaciar');
+Route::get('/mostrar_carrito',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'mostrarcarrito'])->name('carrito.mostrar');
+Route::get('/pagar_carrito',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'pagarcarrito'])->name('carrito.pagar');
+Route::get('/productos',[App\Http\Controllers\cliente\ProductoCatalogoController::class, 'productos'])->name('productos');

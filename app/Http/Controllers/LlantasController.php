@@ -29,6 +29,7 @@ class LlantasController extends Controller
         'precio_3' => $precio3,
         'fecha' => $request->fecha,
         'costo' => $request->costo,
+        'cantidad' => $request->cantidad,
     ]);
 
     // Se guarda la asociación entre la llanta y el proveedor
@@ -39,24 +40,32 @@ class LlantasController extends Controller
     ]);
     
     // Guardar las fotos
-    if ($request->hasFile('fotos')) {
-        foreach ($request->file('fotos') as $foto) {
-            // Guardar la foto en el almacenamiento
-            $ruta = $foto->store('imagenes/llantas', 'public');
+if ($request->hasFile('fotos')) {
+    foreach ($request->file('fotos') as $foto) {
+        // Guardar la foto en el almacenamiento
+        $ruta = $foto->store('imagenes/llantas', 'public');
 
-            // Guardar la ruta de la foto en la tabla 'fotos_llantas'
-            DB::table('fotos_llantas')->insert([
+        // Guardar la ruta de la foto en la tabla 'fotos_llantas'
+        try {
+            $id_foto = DB::table('fotos_llantas')->insertGetId([
                 'id_llanta' => $id_llanta,
                 'ruta' => $ruta,
             ]);
+        } catch (\Exception $e) {
+            // Manejar el error de inserción en la base de datos
+            // Por ejemplo, puedes registrar el error o mostrar un mensaje de error al usuario
+            \Log::error('Error al guardar la foto de la llanta: ' . $e->getMessage());
+            // Si deseas detener la ejecución del proceso, puedes lanzar una excepción aquí
         }
     }
+}
 
     // Obtener las llantas con sus fotos
     $llantas = DB::table('llantas')
         ->join('precios_llantas', 'llantas.id_llanta', '=', 'precios_llantas.id_llanta')
         ->join('llanta_proveedor', 'llantas.id_llanta', '=', 'llanta_proveedor.id_llanta')
         ->join('proveedores', 'llanta_proveedor.id_proveedor', '=', 'proveedores.id_proveedor')
+        ->leftJoin('fotos_llantas', 'llantas.id_llanta', '=', 'fotos_llantas.id_llanta')
         ->select(
             'llantas.id_llanta',
             'llantas.marca',
@@ -70,9 +79,11 @@ class LlantasController extends Controller
             'precios_llantas.precio_3',
             'precios_llantas.fecha',
             'precios_llantas.costo',
+            'precios_llantas.cantidad',
             'proveedores.nombre AS nombre_proveedor', 
-            'llanta_proveedor.id_proveedor' // Alias para evitar conflictos de nombres
-        )
+            'llanta_proveedor.id_proveedor', // Alias para evitar conflictos de nombres
+            'fotos_llantas.ruta AS ruta_foto' // Seleccionar la ruta de la foto
+            )
         ->get();
 
     // Devolvemos la vista con los datos de las llantas, sus precios y el nombre del proveedor
@@ -97,6 +108,7 @@ class LlantasController extends Controller
                 'precio_3' => $request->precio_3,
                 'fecha' => $request->fecha,
                 'costo' => $request->costo,
+                'cantidad' => $request->cantidad,
                 'proveedor' => $request->proveedor,
             ]);
 
@@ -132,6 +144,10 @@ class LlantasController extends Controller
         ->join('precios_llantas', 'llantas.id_llanta', '=', 'precios_llantas.id_llanta')
         ->join('llanta_proveedor', 'llantas.id_llanta', '=', 'llanta_proveedor.id_llanta')
         ->join('proveedores', 'llanta_proveedor.id_proveedor', '=', 'proveedores.id_proveedor')
+        ->leftJoin('fotos_llantas', function ($join) {
+            $join->on('llantas.id_llanta', '=', 'fotos_llantas.id_llanta')
+                ->whereRaw('fotos_llantas.id = (SELECT MIN(id) FROM fotos_llantas WHERE llantas.id_llanta = fotos_llantas.id_llanta)');
+        })
         ->select(
             'llantas.id_llanta',
             'llantas.marca',
@@ -145,18 +161,20 @@ class LlantasController extends Controller
             'precios_llantas.precio_3',
             'precios_llantas.fecha',
             'precios_llantas.costo',
+            'precios_llantas.cantidad',
             'proveedores.nombre AS nombre_proveedor', 
-            'llanta_proveedor.id_proveedor' // Alias para evitar conflictos de nombres
-        )
-        ->get();
+            'llanta_proveedor.id_proveedor', // Alias para evitar conflictos de nombres
+            DB::raw('MIN(fotos_llantas.ruta) AS ruta_foto') // Seleccionar la ruta de la primera foto
+    )
+    ->groupBy('llantas.id_llanta') // Agrupar por el ID de la llanta
+    ->get();
 
     foreach ($llantas as $llanta) {
         // Obtener las fotos asociadas a la llanta y asignarlas a la propiedad $fotos
         $fotos = DB::table('fotos_llantas')->where('id_llanta', $llanta->id_llanta)->get();
         $llanta->fotos = $fotos;
 
-        // // Debug statement para mostrar el contenido de llanta->fotos
-        // dd($llanta->fotos);
+        
     }
 
     // Devolvemos la vista con los datos de las llantas, sus precios y el nombre del proveedor
@@ -181,6 +199,7 @@ class LlantasController extends Controller
             'precios_llantas.precio_3',
             'precios_llantas.fecha',
             'precios_llantas.costo',
+            'precios_llantas.cantidad',
             'proveedores.nombre AS nombre_proveedor', 
             'llanta_proveedor.id_proveedor' // Alias para evitar conflictos de nombres
         )
